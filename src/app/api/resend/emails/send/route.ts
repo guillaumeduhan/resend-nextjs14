@@ -1,5 +1,5 @@
 import { resend } from '@/app/lib/resend';
-import EmailTemplate from '@/components/codewithg';
+import EmailTemplate from '@/components/email-template';
 import { NextRequest, NextResponse } from 'next/server';
 
 type Tag = {
@@ -25,35 +25,16 @@ export async function POST(request: NextRequest) {
   const body = await request.json();
 
   let { from, to, bcc, cc, html, reply_to, subject, content, headers, attachments, tags }: Props = body
-
-  if (!from || !to || !subject || !content) {
-    return NextResponse.json({
-      status: 422,
-      message: "Unprocessable entity"
-    })
-  }
-
-  if (!Array.isArray(to)) to = [to];
-  if (bcc && !Array.isArray(bcc)) bcc = [bcc];
-  if (cc && !Array.isArray(cc)) cc = [cc];
     
   try {
-    const emailPromises = [...new Set(to)]
-      .map((recipientEmail: string) => {
-        return resend.emails.send({
-          from,
-          to: recipientEmail,
-          bcc,
-          cc,
-          reply_to,
-          subject,
-          react: EmailTemplate({ content }),
-        });
-      });
+    await resend.emails.send({
+      from,
+      to,
+      subject,
+      react: EmailTemplate({ content }),
+    });
 
-    const responses = await Promise.all(emailPromises);
-
-    return NextResponse.json({ status: 200, responses });
+    return NextResponse.json({ status: 200 });
   } catch (error) {
     return NextResponse.json({ error });
   }
