@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply text-black;
+}
+
+input[type="text"] {
+  @apply outline-none px-3 py-[4px] border-b flex justify-start items-center;
+}
+
+textarea {
+  @apply px-3 py-3 outline-none h-full w-full;
+}
+
+button {
+  &.primary {
+    @apply bg-blue-600 hover:bg-blue-500 hover:shadow-sm text-white font-medium px-6 py-3 rounded-full disabled:bg-gray-200 #{!important};
+  }
+}
+
+.novel-relative {
+  @apply border-none shadow-none m-0 p-0 #{!important};
+}

@@ -15,10 +15,12 @@
     "@react-email/text": "^0.0.6",
     "@types/react-email-editor": "^1.5.4",
     "next": "14.0.1",
+    "novel": "^0.1.22",
     "react": "^18",
     "react-dom": "^18",
     "react-email": "^1.9.5",
-    "resend": "^2.0.0"
+    "resend": "^2.0.0",
+    "sass": "^1.69.5"
   },
   "devDependencies": {
     "@types/node": "^20",

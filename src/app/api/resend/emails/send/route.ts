@@ -25,6 +25,8 @@ export async function POST(request: NextRequest) {
   const body = await request.json();
 
   let { from, to, bcc, cc, html, reply_to, subject, content, headers, attachments, tags }: Props = body
+
+  console.log(body)
     
   try {
     await resend.emails.send({
@@ -36,6 +38,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ status: 200 });
   } catch (error) {
-    return NextResponse.json({ error });
+    console.log(error)
+    return NextResponse.json({ error: 'missing content' });
   }
 }
